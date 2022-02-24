@@ -151,7 +151,9 @@
     console.log('href: ', href);
 
     /* make a new constant "tag" and extract tag from the "href" constant */
-    const tag =
+    const tag = document.querySellectorAll(href);
+    console.log('tag: ', tag);
+
     /* find all tag links with class active */
 
     /* START LOOP: for each active tag link */
