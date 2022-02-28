@@ -45,15 +45,15 @@
     optArticleTagSelector = '.post-tags .list';
 
   // eslint-disable-next-line no-inner-declarations
-  function generateTitleLinks(){
+  function generateTitleLinks(customSelector = ''){
 
     /* remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
 
     /* for each article */
-    const articles = document.querySelectorAll(optArticleSelector);
-
+    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    console.log('customSelector: ' , customSelector);
     let html = '';
 
     for(let article of articles){
@@ -151,15 +151,20 @@
     console.log('href: ', href);
 
     /* make a new constant "tag" and extract tag from the "href" constant */
-    const tag = document.querySellectorAll(href);
+    const tag = href.replace('#tag-', '');
     console.log('tag: ', tag);
 
     /* find all tag links with class active */
+    const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
+    console.log('tagLinks: ' ,tagLinks);
 
     /* START LOOP: for each active tag link */
+    for(let activeTag of tagLinks){
+      console.log('activeTag: ', activeTag);
 
       /* remove class active */
 
+    }
     /* END LOOP: for each active tag link */
 
     /* find all tag links with "href" attribute equal to the "href" constant */
@@ -171,7 +176,10 @@
     /* END LOOP: for each found tag link */
 
     /* execute function "generateTitleLinks" with article selector as argument */
+    generateTitleLinks('[data-tags~="' + tag + '"]');
   }
+
+
 
   function addClickListenersToTags(){
     /* find all links to tags */
