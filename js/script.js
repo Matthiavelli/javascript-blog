@@ -1,6 +1,18 @@
 {
   'use strict';
 
+  /* OPTIONS */
+
+  const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list',
+    optArticleAuthorSelector = '.post-author';
+
+
+
+  /* TITLE CLICK HANDLER */
+
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -38,11 +50,7 @@
     targetArticle.classList.add('active');
   };
 
-
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list';
+  /* GENERATE TITLE LINKS */
 
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(customSelector = ''){
@@ -91,6 +99,8 @@
 
   generateTitleLinks();
 
+  /* GENERATE TAGS */
+
   // eslint-disable-next-line no-inner-declarations
   function generateTags(){
     /* find all articles */
@@ -120,7 +130,7 @@
         console.log('tag: ', tag);
 
         /* generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + articleTags + '"><span>'+ titleList +'</span></a></li>';
+        const linkHTML = '<li><a href="#tag-' + tag + '"><span>'+ tag +'</span></a></li>';
         console.log('linkHTML: ', linkHTML);
 
         /* add generated code to html variable */
@@ -145,6 +155,8 @@
   }
 
   generateTags();
+
+  /* TAG CLICK HANDLER */
 
   // eslint-disable-next-line no-inner-declarations
   function tagClickHandler(event){
@@ -218,18 +230,48 @@
   // eslint-disable-next-line no-inner-declarations
   function generateAuthor(){
 
-    /* create new variable allAuthors with empy object */
-    let allAuthors = {};
-
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
-
+    console.log('articles: ', articles);
 
     /* START LOOP for every article */
     for(let article of articles) {
 
+      /* make html variable with empty string */
+      let html = '';
+
+      /* get author from .data-author attribute */
+      const articleAuthor = article.getAttribute('data-author');
+      console.log('articleAuthor: ', articleAuthor);
+
+      /* generate HTML of the link */
+      const authorHTML = '<p>' + articleAuthor + '</p>';
+      console.log('authoreHTML: ', authorHTML);
+
+      /* add generated code to html variable */
+      html = html + '' + authorHTML;
+      console.log('html: ', html);
+
+      /* insert HTML of all the links into the tags wrapper */
+      const authorName = article.querySelector(optArticleAuthorSelector);
+      authorName.innerHTML = html;
+
+      /* END LOOP: for every article */
     }
   }
+
+  generateAuthor();
+
+  /* AUTHOR CLICK HANDLER */
+  function authorClickHandler(event) {
+    event.preventDefault();
+    /* make new constant named "clickedElement" and give it the value of "this" */
+    const clickedElement = this;
+    /* make a new constant "href" and read the attribute "href" on the clicked element */
+    const href = clickedElement.getAttribute('href');
+    console.log('href: ', href);
+  }
+
 
 }
 
