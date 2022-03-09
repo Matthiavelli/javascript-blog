@@ -324,7 +324,7 @@
     /* [NEW] START LOOP: for each author in allAuthors */
     for(let author in allAuthors){
       /* [NEW] generate code of a link and it to allAuthorsHTML */
-      allAuthorsData.allAuthors.push({
+      allAuthorsData.authors.push({
         author: author,
         count: allAuthors[author],
       });
@@ -332,7 +332,8 @@
       /* [NEW] END LOOP: for each author in allAuthors */
     }
     /* [NEW] add html from allAuthors to authorList */
-    authorList.innerHTML = templates.authorsListLink(allAuthorsData);
+    console.log(templates.authorListLink(allAuthorsData));
+    authorList.innerHTML = templates.authorListLink(allAuthorsData);
   }
 
   generateAuthor();
